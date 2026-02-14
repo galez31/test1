@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SofaLab | Premium Restoration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Assistant', sans-serif; background-color: #020617; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <section class="min-h-screen pt-32 pb-20 flex flex-col items-center px-6">
+        <div class="w-full max-w-2xl glass rounded-[40px] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+            
+            <!-- Step 1 -->
+            <div id="step-1" class="step-content active space-y-6">
+                <h3 class="text-2xl font-bold mb-6 italic text-cyan-400">מה סוג הספה שלך?</h3>
+                <div class="grid grid-cols-1 gap-4 text-right">
+                    <button onclick="nextStep(2)" class="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-cyan-500/20 transition-all font-bold">ספה פינתית / שזלונג</button>
+                    <button onclick="nextStep(2)" class="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-cyan-500/20 transition-all font-bold">ספה 2-3 מושבים</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step-2" class="step-content space-y-6">
+                <h3 class="text-2xl font-bold mb-6 italic text-cyan-400">מה מצב הלכלוך?</h3>
+                <div class="grid grid-cols-1 gap-4 text-right">
+                    <button onclick="nextStep(3)" class="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-cyan-500/20 transition-all font-bold italic">כתמים קלים - רענון בלבד</button>
+                    <button onclick="nextStep(3)" class="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-cyan-500/20 transition-all font-bold italic text-red-400">כתמים קשים / ריחות רעים</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Final Form -->
+            <div id="step-3" class="step-content space-y-6">
+                <h3 class="text-2xl font-bold mb-6 italic text-cyan-400 uppercase">כמעט סיימנו...</h3>
+                <div class="space-y-4">
+                    <input id="userName" type="text" placeholder="מה השם שלך?" class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-cyan-500 transition-all">
+                    <input id="userPhone" type="tel" placeholder="טלפון לחזרה" dir="ltr" class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-cyan-500 transition-all text-right">
+                    
+                    <!-- הכפתור המתוקן עם פונקציית לחיצה -->
+                    <button id="submitBtn" onclick="handleFinalSubmit()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-5 rounded-2xl shadow-xl shadow-cyan-500/20 transition-all active:scale-95 text-lg uppercase">
+                        שלחו לי הצעת מחיר עכשיו
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success Message Overlay -->
+            <div id="successMessage" class="hidden space-y-6 text-center py-10 animate-bounce">
+                <div class="w-20 h-20 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/50">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="text-3xl font-black text-white">הבקשה נשלחה!</h3>
+                <p class="text-slate-400">תודה שפנית אלינו. ניצור קשר תוך 15 דקות.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+        }
+
+        // פונקציית השליחה המתוקנת
+        function handleFinalSubmit() {
+            const name = document.getElementById('userName').value;
+            const phone = document.getElementById('userPhone').value;
+            const btn = document.getElementById('submitBtn');
+
+            if (!name || !phone) {
+                alert("בבקשה למלא שם וטלפון כדי שנוכל לחזור אליך");
+                return;
+            }
+
+            btn.innerHTML = 'שולח...';
+            btn.disabled = true;
+
+            // סימולציה של שליחה לשרת
+            setTimeout(() => {
+                document.getElementById('step-3').classList.remove('active');
+                document.getElementById('successMessage').classList.remove('hidden');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
