@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SofaLab | Premium Restoration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Assistant', sans-serif; background-color: #020617; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .text-gradient { background: linear-gradient(to left, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-cyan-500 blur-[2px] absolute"></div>
+                <span class="relative text-2xl font-extrabold tracking-tighter italic">SOFA<span class="text-cyan-400">LAB.</span></span>
+            </div>
+            <div class="text-xs font-bold text-emerald-400 tracking-widest uppercase animate-pulse">● 3 צוותים זמינים באזורך</div>
+        </div>
+    </nav>
+
+    <section class="relative pt-40 pb-20 overflow-hidden min-h-screen">
+        <div class="absolute top-20 left-[-10%] w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[120px]"></div>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 relative z-10 text-right">
+            
+            <div class="lg:col-span-6 space-y-8">
+                <h1 class="text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter">הספה שלכם <br><span class="text-gradient underline decoration-cyan-500/20 text-7xl italic">בסטנדרט מעבדה.</span></h1>
+                <p class="text-xl text-slate-400 max-w-lg leading-relaxed font-light">אנחנו מבצעים שחזור עמוק הכולל חיטוי בקטריאלי והסרת כתמים קשים בטכנולוגיית Ion-Extraction.</p>
+                <div class="flex gap-6 opacity-60 font-bold text-xs tracking-[0.2em]">
+                    <span>ECO FRIENDLY</span>
+                    <span>DRY IN 4 HOURS</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <div class="glass p-8 md:p-10 rounded-[40px] shadow-2xl relative border border-white/10">
+                    <div class="flex gap-2 mb-8">
+                        <div id="prog-1" class="h-1 bg-cyan-500 flex-1 rounded-full transition-all"></div>
+                        <div id="prog-2" class="h-1 bg-white/10 flex-1 rounded-full transition-all"></div>
+                        <div id="prog-3" class="h-1 bg-white/10 flex-1 rounded-full transition-all"></div>
+                    </div>
+
+                    <div id="step-1" class="step-content active space-y-6">
+                        <h3 class="text-2xl font-bold">1. מה אנחנו מנקים היום?</h3>
+                        <div class="grid gap-3 text-right">
+                            <button onclick="nextStep(2)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5 text-right font-bold transition-all">ספה פינתית / שזלונג</button>
+                            <button onclick="nextStep(2)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5 text-right font-bold transition-all">ספה 2-3 מושבים</button>
+                            <button onclick="nextStep(2)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5 text-right font-bold transition-all text-slate-500">מזרן / אחר</button>
+                        </div>
+                    </div>
+
+                    <div id="step-2" class="step-content space-y-6">
+                        <h3 class="text-2xl font-bold">2. מה מצב הספה?</h3>
+                        <div class="grid gap-3">
+                            <button onclick="nextStep(3)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/5 text-right font-bold">כתמים קלים (רענון)</button>
+                            <button onclick="nextStep(3)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/5 text-right font-bold text-orange-400">כתמים קשים ומזון</button>
+                            <button onclick="nextStep(3)" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/5 text-right font-bold text-red-500">ריחות רעים / שתן</button>
+                        </div>
+                    </div>
+
+                    <div id="step-3" class="step-content space-y-6">
+                        <h3 class="text-2xl font-bold">3. לאן לשלוח את ההצעה?</h3>
+                        <div class="space-y-4">
+                            <input id="n" type="text" placeholder="שם מלא" class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-cyan-500 transition-all text-right">
+                            <input id="p" type="tel" placeholder="טלפון לחזרה" class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-cyan-500 transition-all text-right" dir="ltr">
+                            <button onclick="finish()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-5 rounded-2xl shadow-xl shadow-cyan-500/30 transition-all active:scale-95 text-lg uppercase font-black uppercase tracking-tighter">קבלת מחיר סופי עכשיו</button>
+                        </div>
+                    </div>
+
+                    <div id="success" class="hidden text-center py-10">
+                        <div class="w-20 h-20 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">✓</div>
+                        <h3 class="text-3xl font-black italic">הבקשה נשלחה!</h3>
+                        <p class="text-slate-400 mt-2 font-light">מומחה מטעמנו יחזור אליך תוך מספר דקות.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function nextStep(s) {
+            document.querySelectorAll('.step-content').forEach(e => e.classList.remove('active'));
+            document.getElementById('step-' + s).classList.add('active');
+            for(let i=1; i<=3; i++) document.getElementById('prog-' + i).style.background = (i <= s) ? '#06b6d4' : 'rgba(255,255,255,0.1)';
+        }
+        function finish() {
+            if(!document.getElementById('n').value || !document.getElementById('p').value) return alert('נא למלא פרטים');
+            document.getElementById('step-3').classList.remove('active');
+            document.getElementById('success').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
