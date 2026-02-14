@@ -1,0 +1,13 @@
+name: Deploy SofaLab Production
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Cloud Provider
+        run: |
+          echo "Deploying to Production Edge..."
+          # Command to sync with S3/Vercel/Netlify
